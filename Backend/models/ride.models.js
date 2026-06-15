@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const rideSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'users',
         required: true
     },
     captain: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'captain',
+        ref: 'captains',
     },
     pickup: {
         type: String,
@@ -52,6 +52,12 @@ const rideSchema = new mongoose.Schema({
         type: String,
         select: false,
         required: true,
+    },
+
+    vehicleType: {
+        type: String,
+        required: true,
+        enum: ['Bike', 'Car', 'Auto'],
     },
 })
 

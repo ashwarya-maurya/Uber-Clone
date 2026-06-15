@@ -9,6 +9,8 @@ const connectToDB = require('./DB/db');
 
 const userRouter = require('./routes/user.routes');
 const captainRouter = require('./routes/captain.routes');
+const mapRouter = require('./routes/map.routes');
+const rideRouter = require('./routes/ride.routes');
 
 connectToDB();
 
@@ -23,5 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/users', userRouter);
 app.use('/captains', captainRouter);
+app.use('/maps', mapRouter);
+app.use('/rides', rideRouter);
 
 module.exports = app;
