@@ -18,10 +18,8 @@ const CaptainPayment = () => {
   return (
     <div className='min-h-screen w-full bg-white flex flex-col'>
 
-      {/* Bottom Sheet */}
       <div className='flex-1 p-6 flex flex-col justify-between'>
 
-        {/* Header */}
         <div className='mb-5'>
           <Link
           to="/captain_home"
@@ -40,7 +38,6 @@ const CaptainPayment = () => {
 
         </div>
 
-        {/* Ride Info */}
         <div className='bg-gray-100 p-4 rounded-2xl mb-5 flex justify-between items-center'>
 
           <div>
@@ -64,14 +61,12 @@ const CaptainPayment = () => {
 
         </div>
 
-        {/* Payment Method Selection */}
         <h3 className='font-semibold mb-3 text-gray-800'>
           Select Payment Mode
         </h3>
 
         <div className='flex flex-col gap-3 mb-5'>
 
-          {/* CASH */}
           <div
             onClick={() => setMethod('cash')}
             className={`p-4 rounded-xl border cursor-pointer flex justify-between items-center ${
@@ -88,7 +83,6 @@ const CaptainPayment = () => {
             <i className='ri-money-rupee-circle-line text-xl'></i>
           </div>
 
-          {/* UPI */}
           <div
             onClick={() => setMethod('upi')}
             className={`p-4 rounded-xl border cursor-pointer flex justify-between items-center ${
@@ -107,7 +101,6 @@ const CaptainPayment = () => {
 
         </div>
 
-        {/* CASH SECTION */}
         {method === 'cash' && (
           <div className='mb-5 p-4 border rounded-2xl'>
 
@@ -126,7 +119,6 @@ const CaptainPayment = () => {
           </div>
         )}
 
-        {/* UPI SECTION */}
         {method === 'upi' && (
             <div className='mb-5 p-4 border rounded-2xl text-center'>
 
@@ -159,7 +151,6 @@ const CaptainPayment = () => {
           </div>
         )}
 
-        {/* ACTION BUTTON */}
         {method === 'cash' ? (
           <button
             onClick={handleCash}
@@ -186,7 +177,6 @@ const CaptainPayment = () => {
           </button>
         )}
 
-        {/* Footer */}
         <p className='text-center text-xs text-gray-400 mt-4'>
           Captain can confirm either Cash or UPI payment
         </p>

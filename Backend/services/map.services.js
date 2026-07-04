@@ -93,3 +93,31 @@ module.exports.getDistanceTime = async (origin, destination) => {
         destination: destinationCoordinates
     };
 };
+
+module.exports.getAddressFromCoordinates = async (lat, lng) => {
+    if (lat === undefined || lat === null || lng === undefined || lng === null) {
+        throw new Error('Latitude and longitude are required');
+    }
+
+    const url = `${NOMINATIM_BASE_URL}/reverse?format=json&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}`;
+
+    const response = await fetch(url, {
+        headers: getHeaders()
+    });
+
+    if (!response.ok) {
+        throw new Error('Unable to fetch address for these coordinates');
+    }
+
+    const data = await response.json();
+
+    if (!data || !data.display_name) {
+        throw new Error('No address found for these coordinates');
+    }
+
+    return {
+        address: data.display_name,
+        lat: Number(lat),
+        lng: Number(lng)
+    };
+};

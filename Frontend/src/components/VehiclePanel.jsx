@@ -1,80 +1,94 @@
 import React from 'react'
 
 const VehiclePanel = (props) => {
+
+  const estimate = props.estimate || {}
+
+  const formatFare = (value) => {
+    if (value === null || value === undefined) {
+      return '—'
+    }
+    return `₹${value}`
+  }
+
+  const selectVehicle = (vehicleType) => {
+    props.setSelectedVehicleType(vehicleType)
+    props.setconfirmRidePanelOpen(true)
+  }
+
   return (
     <div>
-    <h5 onClick={()=>{
-      props.setvehiclePanelOpen(false)
-    }} className='text-center absolute top-0 w-[95%]' ><i className=" text-2xl text-gray-300 ri-arrow-down-wide-line"></i></h5>
+      <h5 onClick={() => {
+        props.setvehiclePanelOpen(false)
+      }} className='text-center absolute top-0 w-[95%]'><i className=" text-2xl text-gray-300 ri-arrow-down-wide-line"></i></h5>
 
-    <h4 className='text-2xl font-bold mb-5'>Choose the Vehicle</h4>
+      <h4 className='text-2xl font-bold mb-5'>Choose the Vehicle</h4>
 
+      <div onClick={() => {
+        selectVehicle('Car')
+      }} className='border-3 border-white active:border-black flex items-center gap-3 p-4 rounded-2xl mb-3'>
 
-    <div onClick={()=>{
-      props.setconfirmRidePanelOpen(true)
-    }} className='border-3 border-white active:border-black flex items-center gap-3 p-4 rounded-2xl mb-3'>
+        <img
+          className='h-11'
+          src="https://www.asaproadworthys.com.au/wp-content/uploads/2021/11/Select.jpeg"
+          alt="Car"
+        />
 
-      <img
-        className='h-11'
-        src="https://www.asaproadworthys.com.au/wp-content/uploads/2021/11/Select.jpeg"
-        alt="Car"
-      />
+        <div className='flex-1'>
+          <h4 className='text-lg font-semibold'>
+            UberGo <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>4</span>
+          </h4>
+          <h5 className='text-sm'>2 mins away</h5>
+          <p className='text-gray-500 text-sm'>Affordable, compact rides</p>
+        </div>
 
-      <div className='flex-1'>
-        <h4 className='text-lg font-semibold'>
-          UberGo <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>4</span>
-        </h4>
-        <h5 className='text-sm'>2 mins away</h5>
-        <p className='text-gray-500 text-sm'>Affordable, compact rides</p>
+        <h4 className='text-lg font-semibold'>{formatFare(estimate.Car)}</h4>
       </div>
 
-      <h4 className='text-lg font-semibold'>₹193</h4>
-    </div>
 
+      <div onClick={() => {
+        selectVehicle('Bike')
+      }} className='border-3 border-white active:border-black flex items-center gap-4 p-4 rounded-2xl mb-3'>
 
-    <div onClick={()=>{
-      props.setconfirmRidePanelOpen(true)
-    }} className='border-3 border-white active:border-black flex items-center gap-4 p-4 rounded-2xl mb-3'>
+        <img
+          className='h-13 px-2.5'
+          src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85NTM4NTEyZC1mZGUxLTRmNzMtYmQ1MS05Y2VmZjRlMjU0ZjEucG5n"
+          alt="Moto"
+        />
 
-      <img
-        className='h-13 px-2.5'
-        src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy85NTM4NTEyZC1mZGUxLTRmNzMtYmQ1MS05Y2VmZjRlMjU0ZjEucG5n"
-        alt="Moto"
-      />
+        <div className='flex-1'>
+          <h4 className='text-lg font-semibold'>
+            Moto <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>1</span>
+          </h4>
+          <h5 className='text-sm'>3 mins away</h5>
+          <p className='text-gray-500 text-sm'>Affordable motorcycle rides</p>
+        </div>
 
-      <div className='flex-1'>
-        <h4 className='text-lg font-semibold'>
-          Moto <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>1</span>
-        </h4>
-        <h5 className='text-sm'>3 mins away</h5>
-        <p className='text-gray-500 text-sm'>Affordable motorcycle rides</p>
+        <h4 className='text-lg font-semibold'>{formatFare(estimate.Bike)}</h4>
       </div>
 
-      <h4 className='text-lg font-semibold'>₹60</h4>
-    </div>
 
+      <div onClick={() => {
+        selectVehicle('Auto')
+      }} className='border-3 border-white active:border-black flex items-center gap-4 p-4 rounded-2xl'>
 
-    <div onClick={()=>{
-      props.setconfirmRidePanelOpen(true)
-    }} className='border-3 border-white active:border-black flex items-center gap-4 p-4 rounded-2xl'>
+        <img
+          className='h-18'
+          src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9mYzEwMWZmOC04MWExLTQ2YzMtOTk1YS02N2I0YmJkMmYyYmYuanBn"
+          alt="Auto"
+        />
 
-      <img
-        className='h-18'
-        src="https://cn-geo1.uber.com/image-proc/crop/resizecrop/udam/format=auto/width=552/height=552/srcb64=aHR0cHM6Ly90Yi1zdGF0aWMudWJlci5jb20vcHJvZC91ZGFtLWFzc2V0cy9mYzEwMWZmOC04MWExLTQ2YzMtOTk1YS02N2I0YmJkMmYyYmYuanBn"
-        alt="Auto"
-      />
+        <div className='flex-1'>
+          <h4 className='text-lg font-semibold'>
+            Auto <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>3</span>
+          </h4>
+          <h5 className='text-sm'>1 mins away</h5>
+          <p className='text-gray-500 text-sm'>Affordable auto rides</p>
+        </div>
 
-      <div className='flex-1'>
-        <h4 className='text-lg font-semibold'>
-          Auto <span className='text-sm font-normal'><i className="ri-user-3-fill"></i>3</span>
-        </h4>
-        <h5 className='text-sm'>1 mins away</h5>
-        <p className='text-gray-500 text-sm'>Affordable auto rides</p>
+        <h4 className='text-lg font-semibold'>{formatFare(estimate.Auto)}</h4>
       </div>
 
-      <h4 className='text-lg font-semibold'>₹100</h4>
-    </div>
-    
     </div>
   )
 }

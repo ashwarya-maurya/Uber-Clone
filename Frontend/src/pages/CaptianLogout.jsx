@@ -1,25 +1,29 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SocketDataContext } from '../context/SocketContext'
+import api from '../services/api'
 
 const CaptianLogout = () => {
-    const token = localStorage.getItem('token')
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const { disconnectSocket } = useContext(SocketDataContext)
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_BASE_URL}/captains/logout`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response) => {
-            if(response.status === 200){
-                localStorage.removeItem('token')
-                navigate('/captain_login')
-            }
-        })
-    }, [])
+  useEffect(() => {
+    api.get('/captains/logout')
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.removeItem('token')
+          disconnectSocket()
+          navigate('/captain_login')
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+        disconnectSocket()
+        navigate('/captain_login')
+      })
+  }, [])
 
-    return <></>
+  return <></>
 }
 
 export default CaptianLogout

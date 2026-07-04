@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { RideDataContext } from '../context/RideContext'
 
 const RideComplete = (props) => {
+
+  const { ride } = useContext(RideDataContext)
+  const activeRide = ride.activeRide
 
   return (
     <div>
@@ -12,9 +16,11 @@ const RideComplete = (props) => {
             <div className='flex items-center justify-between w-full p-2 rounded-lg mb-2 border-3 border-yellow-500 '>
                 <div className='flex gap-1 items-center'>
                     <img className='w-15 h-15 object-cover rounded-full' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6SccWXtO5el1MJFP_JcVKd1z-FKqBEZm6NQ&s" alt="User"/>
-                    <p className='text-xl font-semibold'>Harshita</p>
+                    <p className='text-xl font-semibold'>Rider</p>
                 </div>
-                <p className='text-xl font-semibold'>2.2 Km</p>
+                <p className='text-xl font-semibold'>
+                  {activeRide.distance !== null ? `${(activeRide.distance / 1000).toFixed(1)} Km` : '—'}
+                </p>
             </div>
 
             <div className='w-full'>
@@ -22,23 +28,25 @@ const RideComplete = (props) => {
                 <div className='flex items-center gap-5 border-b mb-3 p-2 border-gray-400'>
                     <div><i className='text-xl ri-map-pin-4-fill'></i></div>
                     <div>
-                        <h2 className='text-lg font-semibold'>Shop 21</h2>
-                        <p className='text-sm -mt-1 text-gray-600'>Connaught Place, New Delhi</p>
+                        <h2 className='text-lg font-semibold'>Pickup</h2>
+                        <p className='text-sm -mt-1 text-gray-600'>{activeRide.pickup || 'Not available'}</p>
                     </div>
                 </div>
 
                 <div className='flex items-center gap-5 border-b mb-3 p-2 border-gray-400'>
                     <div><i className='text-xl ri-square-fill'></i></div>
                     <div>
-                        <h2 className='text-lg font-semibold'>Shop 21</h2>
-                        <p className='text-sm -mt-1 text-gray-600'>Connaught Place, New Delhi</p>
+                        <h2 className='text-lg font-semibold'>Destination</h2>
+                        <p className='text-sm -mt-1 text-gray-600'>{activeRide.destination || 'Not available'}</p>
                     </div>
                 </div>
 
                 <div className='flex items-center gap-5 mb-5 p-2'>
                     <div><i className='text-xl ri-cash-fill'></i></div>
                     <div>
-                        <h2 className='text-lg font-semibold'>₹193</h2>
+                        <h2 className='text-lg font-semibold'>
+                          {activeRide.fare !== null ? `₹${activeRide.fare}` : '—'}
+                        </h2>
                         <p className='text-sm -mt-1 text-gray-600'>Payment</p>
                     </div>
                 </div>

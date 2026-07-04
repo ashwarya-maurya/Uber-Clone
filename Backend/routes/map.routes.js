@@ -41,4 +41,17 @@ router.get('/get-distance-time',
     mapController.getDistanceTime
 );
 
+router.get('/get-address',
+    authMiddleware.authUser,
+    [
+        query('lat')
+            .isFloat()
+            .withMessage('Latitude must be a valid number'),
+        query('lng')
+            .isFloat()
+            .withMessage('Longitude must be a valid number')
+    ],
+    mapController.getAddressFromCoordinates
+);
+
 module.exports = router;
