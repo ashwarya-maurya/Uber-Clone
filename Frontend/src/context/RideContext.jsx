@@ -168,4 +168,5 @@ const RideContext = ({ children }) => {
   )
 }
 
+
 export default RideContext
